@@ -96,8 +96,10 @@ Table schema in `bike_trip_2022`:
 Identify total records in `bike_trip_2022` for data cleaning:
 
 ```sql
-SELECT COUNT(*) AS total_records
-FROM bike_trip_2022
+SELECT
+  COUNT(*) AS total_records
+FROM
+  `utopian-saga-394613.cyclistic_data.bike_trip_2022_v1`
 ```
 
 | total_records |
