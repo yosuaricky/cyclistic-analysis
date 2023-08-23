@@ -48,31 +48,29 @@ All of the data are on csv format and contains every record of user's trip data 
 <summary>Combine dataset</summary>
 
 ```sql
-CREATE TABLE bike_trip_2022
-AS
-SELECT * FROM m01_2022
+SELECT * FROM `utopian-saga-394613.cyclistic_data.m01_2022`
 UNION ALL
-SELECT * FROM m02_2022
+SELECT * FROM `utopian-saga-394613.cyclistic_data.m02_2022`
 UNION ALL
-SELECT * FROM m03_2022
+SELECT * FROM `utopian-saga-394613.cyclistic_data.m03_2022`
 UNION ALL
-SELECT * FROM m04_2022
+SELECT * FROM `utopian-saga-394613.cyclistic_data.m04_2022`
 UNION ALL
-SELECT * FROM m05_2022
+SELECT * FROM `utopian-saga-394613.cyclistic_data.m05_2022`
 UNION ALL
-SELECT * FROM m06_2022
+SELECT * FROM `utopian-saga-394613.cyclistic_data.m06_2022`
 UNION ALL
-SELECT * FROM m07_2022
+SELECT * FROM `utopian-saga-394613.cyclistic_data.m07_2022`
 UNION ALL
-SELECT * FROM m08_2022
+SELECT * FROM `utopian-saga-394613.cyclistic_data.m08_2022`
 UNION ALL
-SELECT * FROM m09_2022
+SELECT * FROM `utopian-saga-394613.cyclistic_data.m09_2022`
 UNION ALL
-SELECT * FROM m10_2022
+SELECT * FROM `utopian-saga-394613.cyclistic_data.m10_2022`
 UNION ALL
-SELECT * FROM m11_2022
+SELECT * FROM `utopian-saga-394613.cyclistic_data.m11_2022`
 UNION ALL
-SELECT * FROM m12_2022
+SELECT * FROM `utopian-saga-394613.cyclistic_data.m12_2022`
 ```
 
 </details>
