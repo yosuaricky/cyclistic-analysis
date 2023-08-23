@@ -102,7 +102,7 @@ SELECT COUNT(*) AS total_records
 FROM bike_trip_2022
 ```
 
-| "total_records" |
+| total_records |
 | ------- |
 | 5667717 |
 
