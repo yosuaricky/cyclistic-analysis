@@ -109,7 +109,7 @@ FROM
 ### Phase 3 - Process
 To easily identify total ride length and the day of the week, I do the following:
 -  I created a column called `ride_length` to calculate the length of each ride by subtracting the column `started_at` from the column `ended_at`
--  Then, I created query using `CASE` to identify the day of the week on each trip, by extracting the date part from column `started_at`
+-  Then, I created query using `CASE` to identify the day of the week on each trip, by extracting the date part from column `started_at` and return the results on HH:MM:SS format
 
 ```sql
 SELECT
@@ -151,5 +151,26 @@ SELECT
 FROM
   `utopian-saga-394613.cyclistic_data.bike_trip_2022`;
 ```
+From the query above, I created new table named `bike_trip_2022_v1` for convenience.
+
+Table schema in `bike_trip_2022_v1`:
+
+| Field name		      | Type      |
+| ------------------- | --------- |
+| ride_id		          | STRING	  |
+| rideable_type		    | STRING	  |
+| started_at		      | TIMESTAMP	|
+| ended_at		        | TIMESTAMP	|
+| ride_length		      | TIME    	|
+| day_of_week		      | STRING  	|
+| start_station_name	| STRING	  |
+| start_station_id		| STRING	  |
+| end_station_name		| STRING	  |
+| end_station_id		  | STRING	  |
+| start_lat		        | FLOAT	    |
+| start_lng		        | FLOAT	    |
+| end_lat		          | FLOAT	    |
+| end_lng		          | FLOAT	    |  
+| member_casual		    | STRING	  |
 
 _will be updated_
