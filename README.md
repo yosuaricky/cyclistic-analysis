@@ -42,35 +42,37 @@ I downloaded all of the data and kept the original version on my google drive fo
 
 </details> 
 
-All of the data are on csv format and contains every record of user's trip data in 2022. I uploaded all of the data to BigQuery, and because each data contains equal column name, I combined them into one single-big-table named `bike_trip_2022`.
+All of the data are on csv format and contains every record of user's trip data in 2022. Because each data contains equal column name, I combined them into one single-big-table named `bike_trip_2022` using PostgreSQL and pgadmin4.
 <details>
 
 <summary>Combine dataset</summary>
 
 ```sql
-SELECT * FROM `utopian-saga-394613.cyclistic_data.m01_2022`
+CREATE TABLE bike_trip_2022
+AS
+SELECT * FROM m01_2022`
 UNION ALL
-SELECT * FROM `utopian-saga-394613.cyclistic_data.m02_2022`
+SELECT * FROM m02_2022`
 UNION ALL
-SELECT * FROM `utopian-saga-394613.cyclistic_data.m03_2022`
+SELECT * FROM m03_2022`
 UNION ALL
-SELECT * FROM `utopian-saga-394613.cyclistic_data.m04_2022`
+SELECT * FROM m04_2022`
 UNION ALL
-SELECT * FROM `utopian-saga-394613.cyclistic_data.m05_2022`
+SELECT * FROM m05_2022`
 UNION ALL
-SELECT * FROM `utopian-saga-394613.cyclistic_data.m06_2022`
+SELECT * FROM m06_2022`
 UNION ALL
-SELECT * FROM `utopian-saga-394613.cyclistic_data.m07_2022`
+SELECT * FROM m07_2022`
 UNION ALL
-SELECT * FROM `utopian-saga-394613.cyclistic_data.m08_2022`
+SELECT * FROM m08_2022`
 UNION ALL
-SELECT * FROM `utopian-saga-394613.cyclistic_data.m09_2022`
+SELECT * FROM m09_2022`
 UNION ALL
-SELECT * FROM `utopian-saga-394613.cyclistic_data.m10_2022`
+SELECT * FROM m10_2022`
 UNION ALL
-SELECT * FROM `utopian-saga-394613.cyclistic_data.m11_2022`
+SELECT * FROM m11_2022`
 UNION ALL
-SELECT * FROM `utopian-saga-394613.cyclistic_data.m12_2022`
+SELECT * FROM m12_2022`
 ```
 
 </details>
@@ -103,16 +105,16 @@ SELECT ride_id, rideable_type, started_at, ended_at,
 DATETIME_DIFF(ended_at, started_at, MINUTE) AS ride_length,
 (SELECT
   CASE
-    WHEN EXTRACT(DAYOFWEEK FROM started_at) = 1 THEN 'Sunday'
-    WHEN EXTRACT(DAYOFWEEK FROM started_at) = 2 THEN 'Monday'
-    WHEN EXTRACT(DAYOFWEEK FROM started_at) = 3 THEN 'Tuesday'
-    WHEN EXTRACT(DAYOFWEEK FROM started_at) = 4 THEN 'Wednesday'
-    WHEN EXTRACT(DAYOFWEEK FROM started_at) = 5 THEN 'Thursday'
-    WHEN EXTRACT(DAYOFWEEK FROM started_at) = 6 THEN 'Friday'
-    ELSE 'Saturday'
+    WHEN EXTRACT(DAYOFWEEK FROM started_at) = 1 THEN 'Monday'
+    WHEN EXTRACT(DAYOFWEEK FROM started_at) = 2 THEN 'Tuesday'
+    WHEN EXTRACT(DAYOFWEEK FROM started_at) = 3 THEN 'Wednesday'
+    WHEN EXTRACT(DAYOFWEEK FROM started_at) = 4 THEN 'Thursday'
+    WHEN EXTRACT(DAYOFWEEK FROM started_at) = 5 THEN 'Friday'
+    WHEN EXTRACT(DAYOFWEEK FROM started_at) = 6 THEN 'Saturday'
+    ELSE 'Sunday'
   END
 ) AS day_of_week
-FROM `utopian-saga-394613.cyclistic_data.bike_trip_2022`
+FROM bike_trip_2022
 ```
 
 _will be updated_
