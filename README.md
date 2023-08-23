@@ -187,6 +187,6 @@ FROM
 
 The total of unique records is equal to total records, so I can confirm there is no duplicate in dataset. Let's continue the data cleaning process.
 
-#### Check for error value in column `ride_length`
+#### Check for NULL value:
 
 _will be updated_
