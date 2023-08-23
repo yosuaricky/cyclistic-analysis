@@ -42,7 +42,7 @@ I downloaded all of the data and kept the original version on my google drive fo
 
 </details> 
 
-All of the data are on csv format and contains every record of user's trip data in 2022. Because each data contains equal column name, I combined them into one single-big-table named `bike_trip_2022` using PostgreSQL and pgadmin4.
+All of the data are on csv format and contains every record of user's trip data in 2022. I uploaded and imported all of the csv to BigQuery, and because each data contains equal column name, I combined them into one-big-table named `bike_trip_2022`.
 <details>
 
 <summary>Combine dataset</summary>
@@ -112,20 +112,44 @@ To easily identify total ride length and the day of the week, I do the following
 -  Then, I created query using `CASE` to identify the day of the week on each trip, by extracting the date part from column `started_at`
 
 ```sql
-SELECT ride_id, rideable_type, started_at, ended_at, 
-DATETIME_DIFF(ended_at, started_at, MINUTE) AS ride_length,
-(SELECT
-  CASE
-    WHEN EXTRACT(DAYOFWEEK FROM started_at) = 1 THEN 'Monday'
-    WHEN EXTRACT(DAYOFWEEK FROM started_at) = 2 THEN 'Tuesday'
-    WHEN EXTRACT(DAYOFWEEK FROM started_at) = 3 THEN 'Wednesday'
-    WHEN EXTRACT(DAYOFWEEK FROM started_at) = 4 THEN 'Thursday'
-    WHEN EXTRACT(DAYOFWEEK FROM started_at) = 5 THEN 'Friday'
-    WHEN EXTRACT(DAYOFWEEK FROM started_at) = 6 THEN 'Saturday'
-    ELSE 'Sunday'
+SELECT
+  ride_id,
+  rideable_type,
+  started_at,
+  ended_at,
+  (
+  SELECT
+    TIME_ADD( TIME '0:0:0', INTERVAL TIMESTAMP_DIFF(ended_at, started_at, SECOND) SECOND )) AS ride_length,
+  (
+  SELECT
+    CASE
+      WHEN EXTRACT(DAYOFWEEK FROM started_at) = 1 THEN 'Sunday'
+      WHEN EXTRACT(DAYOFWEEK
+    FROM
+      started_at) = 2 THEN 'Monday'
+      WHEN EXTRACT(DAYOFWEEK FROM started_at) = 3 THEN 'Tuesday'
+      WHEN EXTRACT(DAYOFWEEK
+    FROM
+      started_at) = 4 THEN 'Wednesday'
+      WHEN EXTRACT(DAYOFWEEK FROM started_at) = 5 THEN 'Thursday'
+      WHEN EXTRACT(DAYOFWEEK
+    FROM
+      started_at) = 6 THEN 'Friday'
+    ELSE
+    'Saturday'
   END
-) AS day_of_week
-FROM bike_trip_2022
+    ) AS day_of_week,
+  start_station_name,
+  start_station_id,
+  end_station_name,
+  end_station_id,
+  start_lat,
+  start_lng,
+  end_lat,
+  end_lng,
+  member_casual
+FROM
+  `utopian-saga-394613.cyclistic_data.bike_trip_2022`;
 ```
 
 _will be updated_
