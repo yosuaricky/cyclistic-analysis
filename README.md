@@ -107,7 +107,7 @@ FROM
 | 5667717 |
 
 ### Phase 3 - Process
-To easily identify total ride length and the day of the week, I do the following:
+To easily identify total ride length and the day of the week on each trip, I do the following:
 -  I created a column called `ride_length` to calculate the length of each ride by subtracting the column `started_at` from the column `ended_at`
 -  Then, I created query using `CASE` to identify the day of the week on each trip, by extracting the date part from column `started_at` and return the results on HH:MM:SS format
 
@@ -172,5 +172,20 @@ Table schema in `bike_trip_2022_v1`:
 | end_lat		          | FLOAT	    |
 | end_lng		          | FLOAT	    |  
 | member_casual		    | STRING	  |
+
+Check for duplicate rows:
+
+```sql
+SELECT
+  COUNT(DISTINCT ride_id) AS unique_records
+FROM
+  `utopian-saga-394613.cyclistic_data.bike_trip_2022_v1`
+```
+
+| unique_records |
+| ------- |
+| 5667717 |
+
+The total of unique records is equal to total records, so I can confirm there is no duplicate in dataset.
 
 _will be updated_
