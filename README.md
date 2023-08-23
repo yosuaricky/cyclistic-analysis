@@ -77,7 +77,7 @@ SELECT * FROM m12_2022
 
 </details>
 
-Table schema on `bike_trip_2022`:
+Table schema in `bike_trip_2022`:
 
 | Field name		      | Type      |
 | ------------------- | --------- |
@@ -94,6 +94,17 @@ Table schema on `bike_trip_2022`:
 | end_lat		          | FLOAT	    |
 | end_lng		          | FLOAT	    |  
 | member_casual		    | STRING	  |
+
+Identify total records in `bike_trip_2022` for data cleaning:
+
+```sql
+SELECT COUNT(*) AS total_records
+FROM bike_trip_2022
+```
+
+| "total_records" |
+| ------- |
+| 5667717 |
 
 ### Phase 3 - Process
 To easily identify total ride length and the day of the week, I do the following:
