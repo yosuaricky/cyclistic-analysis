@@ -107,9 +107,10 @@ FROM
 | 5667717 |
 
 ### Phase 3 - Process
-To easily identify total ride length and the day of the week on each trip, I do the following:
+To make it easier on analyzing the data, I made a couple of changes:
 -  I created a column called `ride_length` to calculate the length of each ride by subtracting the column `started_at` from the column `ended_at`
 -  Then, I created query using `CASE` to identify the day of the week on each trip, by extracting the date part from column `started_at` and return the results on HH:MM:SS format
+-  Finally, I changed column `member_casual` to `user_type` because it's more self explanatory
 
 ```sql
 SELECT
@@ -117,9 +118,7 @@ SELECT
   rideable_type,
   started_at,
   ended_at,
-  (
-  SELECT
-    TIME_ADD( TIME '0:0:0', INTERVAL TIMESTAMP_DIFF(ended_at, started_at, SECOND) SECOND )) AS ride_length,
+  datetime_diff(ended_at, started_at, MINUTE) AS ride_length,
   (
   SELECT
     CASE
@@ -147,11 +146,11 @@ SELECT
   start_lng,
   end_lat,
   end_lng,
-  member_casual
+  member_casual as user_type
 FROM
   `utopian-saga-394613.cyclistic_data.bike_trip_2022`;
 ```
-From the query above, I created new table named `bike_trip_2022_v1` for convenience.
+From the query above, I created new table named `bike_trip_2022_v1` for the convenience in data cleaning process.
 
 Table schema in `bike_trip_2022_v1`:
 
@@ -161,7 +160,7 @@ Table schema in `bike_trip_2022_v1`:
 | rideable_type		    | STRING	  |
 | started_at		      | TIMESTAMP	|
 | ended_at		        | TIMESTAMP	|
-| ride_length		      | TIME    	|
+| ride_length		      | INTEGER  	|
 | day_of_week		      | STRING  	|
 | start_station_name	| STRING	  |
 | start_station_id		| STRING	  |
@@ -173,7 +172,7 @@ Table schema in `bike_trip_2022_v1`:
 | end_lng		          | FLOAT	    |  
 | member_casual		    | STRING	  |
 
-Check for duplicate rows:
+#### Check for duplicate rows:
 
 ```sql
 SELECT
@@ -186,6 +185,8 @@ FROM
 | ------- |
 | 5667717 |
 
-The total of unique records is equal to total records, so I can confirm there is no duplicate in dataset.
+The total of unique records is equal to total records, so I can confirm there is no duplicate in dataset. Let's continue the data cleaning process.
+
+#### Check for error value in column `ride_length`
 
 _will be updated_
