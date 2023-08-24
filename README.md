@@ -11,7 +11,7 @@ In order to answer the key business questions, I will follow the steps of the da
 ### Phase 1 - Ask
 Based on above scenario, I started this project by asking the stakeholder about the project goals. This phase will give me clear understanding about the business tasks, and stay focus on the project goals when applying next step on every phase of data analysis process. This phase will also help me to decide: what data should I get, and how to perform analysis on this kind of data.
 
-Three questions arose after applied this phase:
+The stakeholder has set a clear goal: **Converting casual riders into annual members**. In order to do that, first I need to find out:
 1. How do annual members and casual riders use Cyclistic bikes differently?
 2. Why would casual riders buy Cyclistic annual memberships?
 3. How can Cyclistic use digital media to influence casual riders to become members?
@@ -106,11 +106,30 @@ FROM
 | ------- |
 | 5667717 |
 
+Checking for duplicates:
+
+```sql
+SELECT
+  COUNT(DISTINCT ride_id) AS unique_records
+FROM
+  `utopian-saga-394613.cyclistic_data.bike_trip_2022_v1`
+```
+
+| unique_records |
+| ------- |
+| 5667717 |
+
+The total of unique records is equal to total records, so I can confirm there is no duplicate in dataset. However, after further inspection, I found problems in the data:
+- `member_casual` is ambiguous, there must be a better name for it
+- There are NULL values recorded
+- Timestamp in `ended_at` are recorded earlier than `started_at`
+- Lots of trips duration is occured under 10 seconds
+
 ### Phase 3 - Process
 To make it easier on analyzing the data, I made a couple of changes:
--  I created a column called `ride_length` to calculate the length of each ride by subtracting the column `started_at` from the column `ended_at`
--  Then, I created query using `CASE` to identify the day of the week on each trip, by extracting the date part from column `started_at` and return the results on HH:MM:SS format
--  Finally, I changed column `member_casual` to `user_type` because it's more self explanatory
+-  Create a column called `ride_length` to calculate the length of each ride by subtracting the column `started_at` from the column `ended_at`
+-  Create query using `CASE` to identify the day of the week on each trip, by extracting the date part from column `started_at` and return the results on HH:MM:SS format
+-  Change column `member_casual` to `user_type` because it's more self explanatory
 
 ```sql
 SELECT
@@ -172,21 +191,8 @@ Table schema in `bike_trip_2022_v1`:
 | end_lng		          | FLOAT	    |  
 | member_casual		    | STRING	  |
 
-#### Check for duplicate rows:
-
-```sql
-SELECT
-  COUNT(DISTINCT ride_id) AS unique_records
-FROM
-  `utopian-saga-394613.cyclistic_data.bike_trip_2022_v1`
-```
-
-| unique_records |
-| ------- |
-| 5667717 |
-
-The total of unique records is equal to total records, so I can confirm there is no duplicate in dataset. Let's continue the data cleaning process.
-
-#### Check for NULL value:
+#### Delete rows with NULL values
+#### Delete rows which `ended_at` recorded earlier than `started_at'
+#### Delete rows with small trip duration
 
 _will be updated_
