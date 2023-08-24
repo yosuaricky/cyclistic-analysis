@@ -191,8 +191,44 @@ Table schema in `bike_trip_2022_v1`:
 | end_lng		          | FLOAT	    |  
 | member_casual		    | STRING	  |
 
-#### Delete rows with NULL values
-#### Delete rows which `ended_at` recorded earlier than `started_at'
-#### Delete rows with small trip duration
+Based on problems I found earlier in dataset, I do the following:
+- Removed all rows with NULL values, because it could impact result of the analysis
+- Removed all rows with faulty recorded timestamp
+- Removed all rows with trip durations under 1 minute
+
+```sql
+SELECT
+  *
+FROM
+  `utopian-saga-394613.cyclistic_data.bike_trip_2022_v1`
+WHERE
+  start_station_name IS NOT NULL
+  AND end_station_name IS NOT NULL
+  AND start_station_id IS NOT NULL
+  AND end_station_id IS NOT NULL
+  AND start_lat IS NOT NULL
+  AND start_lng IS NOT NULL
+  AND end_lat IS NOT NULL
+  AND end_lng IS NOT NULL
+  AND ended_at > started_at
+  AND ride_length > 0
+```
+
+I saved the result into new table named `bike_trip_2022_v2`, and check the total records to identify whether the data is sufficient enough for analysis or not, compared to total records in the dirty dataset.
+
+```sql
+SELECT
+  COUNT(*)
+FROM
+  `utopian-saga-394613.cyclistic_data.bike_trip_2022_v2`
+```
+
+| v2_records |
+| ------- |
+| 4292709 |
+
+24% records deleted from the dirty dataset, and remaining 76% of data is sufficient for the next phase.
+
+### Phase 4 - Analyze
 
 _will be updated_
