@@ -230,5 +230,13 @@ FROM
 24% records deleted from the dirty dataset, and remaining 76% of data is sufficient for the next phase.
 
 ### Phase 4 - Analyze
+First, let's start with creating summary from the data:
+- Calculate the mean of ride_length
+- Calculate the max ride_length
 
+Analyzing customer behaviour:
+- Calculate the average ride_length for members and casual riders
+- Calculate the average ride_length for users by day_of_week
+- Calculate the number of rides for users by day_of_week
+- Calculate total ride on different seasons
 _will be updated_
