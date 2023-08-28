@@ -14,7 +14,9 @@ You are a junior data analyst working in the marketing analyst team at Cyclistic
 
 In order to answer the key business questions, I will follow the steps of the data analysis process: _ask, prepare, process, analyze, share, and act_.
 
-### Phase 1 - Ask
+<details><summary>Phase 1 - Ask</summary>
+
+### Phase 1 - Asking the right question
 
 Based on above scenario, I started this project by asking the stakeholder about the project goals. This phase will give me clear understanding about the business tasks, and stay focus on the project goals when applying next step on every phase of data analysis process. This phase will also help me to decide: what data should I get, and how to perform analysis on this kind of data.
 
@@ -24,7 +26,11 @@ The stakeholder has set a clear goal: **Converting casual riders into annual mem
 2. Why would casual riders buy Cyclistic annual memberships?
 3. How can Cyclistic use digital media to influence casual riders to become members?
 
-### Phase 2 - Prepare
+</details>
+
+<details><summary>Phase 2 - Prepare</summary>
+
+### Phase 2 - Preparing the data
 
 For the purposes of this case study, I will use [Divvy’s historical trip data](https://divvy-tripdata.s3.amazonaws.com/index.html), and download the last 12 months of trip data to analyze and identify trends. The data has been made available by Motivate International Inc. under this [license](https://ride.divvybikes.com/data-license-agreement). Because Cyclistic is a fictional company, I will use this public data to explore how different customer types are using their bikes. However, data-privacy issues prohibit me from using rider's personally identifiable information, so I won’t be able to connect pass purchases to credit card numbers to determine if casual riders live in the company service area or if they have purchased multiple single passes.
 
@@ -136,7 +142,11 @@ The total of unique records is equal to total records, so I can confirm there is
 - Timestamp in `ended_at` are recorded earlier than `started_at`
 - Lots of trips duration is occured under 10 seconds
 
-### Phase 3 - Process
+</details>
+
+<details><summary>Phase 3 - Process</summary>
+
+### Phase 3 - Processing the data
 
 To make it easier on analyzing the data, I made a couple of changes:
 
@@ -244,7 +254,11 @@ FROM
 
 24% records deleted from the dirty dataset, and remaining 76% of data is sufficient for the next phase.
 
-### Phase 4 - Analyze
+</details>
+
+<details><summary>Phase 4 - Analyze</summary>
+
+### Phase 4 - Analyzing the data
 
 First, in order to gathered summary from the data, I created sql queries to:
 
@@ -393,9 +407,13 @@ result:
 | Friday | 353087 | 244983 |
 | Sunday | 291637 | 296599 |
 
-### Phase 5 - Share
+</details>
 
-After creating summary and all metrics to answer the key business task, I decided to create an interactive dashboard using Google Looker Studio.
+<details><summary>Phase 5 - Share</summary>
+
+### Phase 5 - Sharing insights
+
+After creating summary and all metrics to answer the key business questions, I decided to create an interactive dashboard using Google Looker Studio.
 
 ![cyclistic dashboard](/project-image/cyclistic_dashboard.png)
 
@@ -411,4 +429,10 @@ Feel free to interact with the dashboard by accessing this link:
 
 <sub>_because the large amount of data being generated, you may encounter slight delay when interacting with the dashboard_</sub>
 
-_will be updated_
+</details>
+
+<details><summary>Phase 6 - Act</summary>
+
+### Phase 6 - Take action
+  
+</details>
