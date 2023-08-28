@@ -256,7 +256,7 @@ The result of summary:
 | 34354 | 16.9 | 1 |
 
 And then I start analyzing the data to find out:
-- What is the percentage of member and casual user from total user
+- What is the percentage of member and casual user from total user:
 
 ```sql
 SELECT
@@ -275,7 +275,7 @@ result:
 | member | 59.7 |
 | casual | 40.3 |
 
-- What is the total between each type of bike from the `rideable_type`
+- What is the total between each type of bike from the `rideable_type`:
 
 ```sql
 SELECT
@@ -296,11 +296,93 @@ result:
 | electric_bike | 1560462 |
 | docker_bike | 173344 |
 
-- Find the total between member and casual user on each month
+- Find the total between member and casual user on each month:
 
 ```sql
-
+SELECT
+  -- extract month from the date of trip
+  EXTRACT(month
+  FROM
+    started_at) AS month,
+  -- return 1 if user_type is 'member', then apply sum function for all returned value to find out the total of member on each month  
+  SUM(CASE
+      WHEN user_type = 'member' THEN 1
+    ELSE
+    0
+  END
+    ) AS member,
+  -- return 1 if user_type is 'casual', then apply sum function for all returned value to find out the total of casual-user on each month  
+  SUM(CASE
+      WHEN user_type = 'casual' THEN 1
+    ELSE
+    0
+  END
+    ) AS casual
+FROM
+  `utopian-saga-394613.cyclistic_data.bike_trip_2022_v2`
+GROUP BY
+  month
+ORDER BY
+  month
 ```
 
-- Find the total of member 
+result:
+| month | member | casual |
+| ------- | ------- | ------- | 
+| 1 | 66575 | 12481 |
+| 2 | 72683 | 14973 |
+| 3 | 146497 | 66409 |
+| 4 | 177723 | 90816 |
+| 5 | 277162 | 216938 |
+| 6 | 322256 | 287553 |
+| 7 | 324307 | 306612 |
+| 8 | 328577 | 265748 |
+| 9 | 307844 | 217485 |
+| 10 | 257460 | 148865 |
+| 11 | 178766 | 72366 |
+| 12 | 101634 | 30979 |
+
+- Find the total between member and casual user on each day_of_week:
+
+```sql
+SELECT
+  day_of_week,
+  -- return 1 if user_type is 'member', then apply sum function for all returned value to find out the total of member on each day_of_week
+  SUM(CASE
+      WHEN user_type = 'member' THEN 1
+    ELSE
+    0
+  END
+    ) AS member,
+  -- return 1 if user_type is 'casual', then apply sum function for all returned value to find out the total of casual-user on each day_of_week  
+  SUM(CASE
+      WHEN user_type = 'casual' THEN 1
+    ELSE
+    0
+  END
+    ) AS casual
+FROM
+  `utopian-saga-394613.cyclistic_data.bike_trip_2022_v2`
+GROUP BY
+  day_of_week
+```
+
+result:
+| day_of_week | member | casual |
+| ------- | ------- | ------- | 
+| Thursday | 408198 | 226566 |
+| Tuesday | 403846 | 193413 |
+| Wednesday | 405146 | 200515 |
+| Monday | 368255 | 207540 |
+| Saturday | 331315 | 361609 |
+| Friday | 353087 | 244983 |
+| Sunday | 291637 | 296599 |
+
+### Phase 5 - Share
+After creating summary and all metrics to answer the key business task, I decided to create an interactive dashboard using Google Looker Studio.
+Using this tool allow me to publicly share my insight, the dashboard will be able to filter data based on specific criteria such as:
+- Filter data by range of date (01 January 2022 - 31 December 2022)
+- Filter data based on type of user (member, casual)
+- Filter data based on type of bike (classic, bike, electric bike, docked bike)
+
 _will be updated_
