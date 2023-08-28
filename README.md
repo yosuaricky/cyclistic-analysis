@@ -1,4 +1,4 @@
-# Data analysis on 'Cyclistic', a fictional bike-sharing company.
+# Data analysis on 'Cyclistic', a fictional bike-sharing company
 
 ## Introduction
 This project is my submission for Study Case 1 on **[Google Data Analytics Professional Certificate](https://www.coursera.org/professional-certificates/google-data-analytics) - Capstone Project**.
@@ -380,9 +380,18 @@ result:
 
 ### Phase 5 - Share
 After creating summary and all metrics to answer the key business task, I decided to create an interactive dashboard using Google Looker Studio.
-Using this tool allow me to publicly share my insight, the dashboard will be able to filter data based on specific criteria such as:
+
+![Alt text](image link)
+
+This tool allow me to publicly share my insight, the dashboard will be able to filter data based on specific criteria such as:
 - Filter data by range of date (01 January 2022 - 31 December 2022)
 - Filter data based on type of user (member, casual)
 - Filter data based on type of bike (classic, bike, electric bike, docked bike)
+
+Feel free to interact with the dashboard by accessing this link:
+
+**[Cyclistic Dashboard](https://lookerstudio.google.com/reporting/cf9914e4-e461-4ded-bdb3-d90bd6dcfc93)**
+
+<sub>*because the large amount of data being generated, you may encounter slight delay when interacting with the dashboard*</sub>
 
 _will be updated_
