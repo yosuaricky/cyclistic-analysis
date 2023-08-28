@@ -1,4 +1,4 @@
-# Data analysis on 'Cyclistic', a fictional bike-sharing company
+# Data analysis on 'Cyclistic', a Chicago based bike-sharing company
 
 ## Introduction
 
@@ -18,13 +18,9 @@ In order to answer the key business questions, I will follow the steps of the da
 
 ### Phase 1 - Asking the right question
 
-Based on above scenario, I started this project by asking the stakeholder about the project goals. This phase will give me clear understanding about the business tasks, and stay focus on the project goals when applying next step on every phase of data analysis process. This phase will also help me to decide: what data should I get, and how to perform analysis on this kind of data.
+Based on above scenario, I started this project by asking the stakeholder about the project goals. This phase will give me clear understanding about the business tasks, and stay focus on the project goals. This phase will also help me to decide: what data should I get, and how to perform analysis on this kind of data.
 
-The stakeholder has set a clear goal: **Converting casual riders into annual members**. In order to do that, first I need to find out:
-
-1. How do annual members and casual riders use Cyclistic bikes differently?
-2. Why would casual riders buy Cyclistic annual memberships?
-3. How can Cyclistic use digital media to influence casual riders to become members?
+The stakeholder has set a clear goal: **Converting casual riders into annual members**. In order to do that, first I need to find out how do annual members and casual riders use Cyclistic bikes differently?
 
 </details>
 
@@ -126,7 +122,7 @@ Checking for duplicates:
 
 ```sql
 SELECT
-  COUNT(DISTINCT ride_id) AS v1_records
+  COUNT(DISTINCT ride_id) AS unique_records
 FROM
   `utopian-saga-394613.cyclistic_data.bike_trip_2022_v1`
 ```
@@ -434,5 +430,20 @@ Feel free to interact with the dashboard by accessing this link:
 <details><summary>Phase 6 - Act</summary>
 
 ### Phase 6 - Take action
-  
+
+After created the dashboard and interacted with it, I found couples of important insight that can drive bussiness marketing decisions:
+
+#### Key findings:
+- Because of summer season on United States, the peak of total user is in June - August. Total user will start decline gradually on winter season in September through January.
+- Annual Cyclistic member use bike mostly during weekdays for daily activities such as going to work, shopping, going to school, etc.
+- Casual user use bike mostly on weekend for their leisures time and physical exercises during holiday.
+- The most favourite type of ride is classic bike, because classic bike offer more physical exercise than electric bike and user tend to appreciate more healthy lifestyle. 
+
+What kind of action that Cyclistic can take to convert more casual user into annual member?
+
+#### Recommendations:
+- Marketing campaign should be targeted towards summer when users more likely to utilize Cyclistic service.
+- The marketing team should promoting Cyclistic on Friday through Sunday, because casual user seen more on weekend during their leisures time.
+- In order to gain new potential user, the marketing team can also consider to create advertising on every store that sell healthy product or facility like pharmacy, gym, and hospital.
+
 </details>
