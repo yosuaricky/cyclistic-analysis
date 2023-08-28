@@ -1,7 +1,10 @@
-# My data analysis on 'Cyclistic', a fictional bike-sharing company.
+# Data analysis on 'Cyclistic', a fictional bike-sharing company.
 
 ## Introduction
 This project is my submission for Study Case 1 on **[Google Data Analytics Professional Certificate](https://www.coursera.org/professional-certificates/google-data-analytics) - Capstone Project**.
+
+Cyclistic is a company providing bike-share program that features more than 5,800 bicycles and 600 docking stations. Cyclistic sets itself apart by also offering reclining bikes, hand tricycles, and cargo bikes, making bike-share more inclusive to people with disabilities and riders who can’t use a standard two-wheeled bike. The majority of riders opt for traditional bikes; about 8% of riders use the assistive options. Cyclistic users are more likely to ride for leisure, but about 30% use them to commute to work each day.
+
 ## Scenario
 You are a junior data analyst working in the marketing analyst team at Cyclistic, a bike-share company in Chicago. The director of marketing believes the company’s future success depends on maximizing the number of annual memberships. Therefore, your team wants to understand how casual riders and annual members use Cyclistic bikes differently. From these insights, your team will design a new marketing strategy to convert casual riders into annual members. But first, Cyclistic executives must approve your recommendations, so they must be backed up with compelling data insights and professional data visualizations.
 
@@ -110,7 +113,7 @@ Checking for duplicates:
 
 ```sql
 SELECT
-  COUNT(DISTINCT ride_id) AS unique_records
+  COUNT(DISTINCT ride_id) AS v1_records
 FROM
   `utopian-saga-394613.cyclistic_data.bike_trip_2022_v1`
 ```
@@ -230,13 +233,74 @@ FROM
 24% records deleted from the dirty dataset, and remaining 76% of data is sufficient for the next phase.
 
 ### Phase 4 - Analyze
-First, let's start with creating summary from the data:
-- Calculate the mean of ride_length
-- Calculate the max ride_length
+First, in order to gathered summary from the data, I created sql queries to:
+- Calculate the maximum duration of `ride_length`
+- Calculate the average duration of `ride_length`
+- Calculate the minimum duration of `ride_length`
 
-Analyzing customer behaviour:
-- Calculate the average ride_length for members and casual riders
-- Calculate the average ride_length for users by day_of_week
-- Calculate the number of rides for users by day_of_week
-- Calculate total ride on different seasons
+```sql
+SELECT
+  -- calculate maximum trip duration
+  MAX(ride_length) AS longest_trip,
+  -- calculate mean of trip duration, and rounded the result
+  ROUND(AVG(ride_length), 2) AS average_trip,
+  -- calculate minimum trip duration
+  MIN(ride_length) AS shortest_trip
+FROM
+  `utopian-saga-394613.cyclistic_data.bike_trip_2022_v2`
+```
+
+The result of summary: 
+| longest_trip | average_trip | shortest_trip |
+| ------- | ------- | ------- |
+| 34354 | 16.9 | 1 |
+
+And then I start analyzing the data to find out:
+- What is the percentage of member and casual user from total user
+
+```sql
+SELECT
+  user_type,
+  -- find the percentage of member and casual user from total user and round the result
+  ROUND(COUNT(*) / (SELECT COUNT(*) FROM `utopian-saga-394613.cyclistic_data.bike_trip_2022_v2`) * 100, 1) AS user_percentage
+FROM
+  `utopian-saga-394613.cyclistic_data.bike_trip_2022_v2`
+GROUP BY
+  user_type
+```
+
+result:
+| user_type | user_percentage |
+| ------- | ------- |
+| member | 59.7 |
+| casual | 40.3 |
+
+- What is the total between each type of bike from the `rideable_type`
+
+```sql
+SELECT
+  rideable_type,
+  COUNT(*) AS total
+FROM
+  `utopian-saga-394613.cyclistic_data.bike_trip_2022_v2`
+GROUP BY
+  rideable_type
+ORDER BY
+  total desc
+```
+
+result:
+| rideable_type | total |
+| ------- | ------- |
+| classic_bike | 2558903 |
+| electric_bike | 1560462 |
+| docker_bike | 173344 |
+
+- Find the total between member and casual user on each month
+
+```sql
+
+```
+
+- Find the total of member 
 _will be updated_
