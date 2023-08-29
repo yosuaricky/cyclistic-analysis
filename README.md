@@ -1,4 +1,4 @@
-# Data analysis on 'Cyclistic', a Chicago based bike-sharing company
+# Data analysis for Cyclistic, a Chicago based bike-sharing company
 
 ## Introduction
 
